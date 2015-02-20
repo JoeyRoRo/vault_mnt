@@ -1,0 +1,24 @@
+#!/bin/bash
+VERSION="0.2"
+PWD=
+echo "Vault v$VERSION"
+
+sudo fdisk -l 
+SOURCE=
+until [ -e "$SOURCE" ]; do 				# -e means file exists
+	printf "What is the source drive?: "
+	read SOURCE
+	if [[ ! -e "$SOURCE" ]]; then 		# ! -e means file doesn't exist
+		echo "Source doesn't exist. Try again..."
+	fi
+done
+
+echo
+read -p "Vault: Enter your password: " -s PWD
+echo
+echo -n "Vault: Decrypting..."
+sudo dislocker -v -V "$SOURCE" -u$PWD -- /mnt/tmp
+echo "OK"
+echo -n "Vault: Mounting..."
+sudo mount -o loop -t ntfs-3g /mnt/tmp/dislocker-file /mnt/decrypted/
+echo "OK"
