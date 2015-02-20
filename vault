@@ -3,7 +3,7 @@ VERSION="0.2"
 PWD=
 echo "Vault v$VERSION"
 
-sudo fdisk -l 
+sudo lsblk
 SOURCE=
 until [ -e "$SOURCE" ]; do 				# -e means file exists
 	printf "What is the source drive?: "
@@ -13,13 +13,13 @@ until [ -e "$SOURCE" ]; do 				# -e means file exists
 	fi
 done
 
-TARGET="/mnt/decrpyted""
+TARGET="/mnt/decrpyted"
 if [[ ! -d "$TARGET" ]]; then 				# -d means directory exist
-	mkdir /mnt/decrypted
+	sudo mkdir /mnt/decrypted
 fi
 TARGET="/mnt/tmp"
 if [[ ! -d "$TARGET" ]]; then 				# -d means directory exist
-	mkdir /mnt/tmp
+	sudo mkdir /mnt/tmp
 fi
 
 echo
