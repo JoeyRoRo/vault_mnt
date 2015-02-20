@@ -13,6 +13,15 @@ until [ -e "$SOURCE" ]; do 				# -e means file exists
 	fi
 done
 
+TARGET="/mnt/decrpyted""
+if [[ ! -d "$TARGET" ]]; then 				# -d means directory exist
+	mkdir /mnt/decrypted
+fi
+TARGET="/mnt/tmp"
+if [[ ! -d "$TARGET" ]]; then 				# -d means directory exist
+	mkdir /mnt/tmp
+fi
+
 echo
 read -p "Vault: Enter your password: " -s PWD
 echo
